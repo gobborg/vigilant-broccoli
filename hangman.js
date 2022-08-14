@@ -48,11 +48,12 @@ function update(letter) {
   if (bodyParts == 0) {
     document.getElementById('theButton').disabled = true; // no more inputs accepted
     document.getElementById('status').innerHTML = "You ran out of body parts. SAD. Refresh to restart.";
+	document.getElementById('word').innerHTML = "The word was " + word + ".";
     localStorage.removeItem('wordToGuess');
     localStorage.removeItem('tries');
     localStorage.removeItem('guesses');
   }
-  document.getElementById('tries').innerHTML = "Remaining tries: " + bodyParts;
+  document.getElementById('tries').innerHTML = "Remaining body parts: " + bodyParts;
 }
 
 // local storage
@@ -68,7 +69,7 @@ else { // put stuff in local storage
   localStorage.setItem('guesses', guessedLetters);
 }
 
-document.getElementById('tries').innerHTML = "Remaining tries: " + bodyParts;
-document.getElementById('wordLength').innerHTML = "The word is " + length + " letters.";
+document.getElementById('tries').innerHTML = "Remaining body parts: " + bodyParts;
+document.getElementById('wordLength').innerHTML = "The word has " + length + " letters.";
 
 hangman();
