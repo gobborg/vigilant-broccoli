@@ -7,17 +7,16 @@ var guessedLetters = ''
 
 // take inputs
 function eatGuess() {
-  var guess = document.getElementById('guessedLetter').value;
-  //console.log(guess)
+  var guess = document.getElementById('guessedLetter').value; // take guess from html form
   update(guess);
-  document.getElementById('guessedLetter').value = "";
+  document.getElementById('guessedLetter').value = ""; // clear html form
 }
 // fill in the slots with correct guesses
 function hangman() {
   var letterSlots = '';
   var wordArray = Array.from(word)
   var won = true;
-  for (i = 0; i < word.length; i++) {
+  for (i = 0; i < word.length; i++) { // fill "word" w `-` or letters
     if (guessedLetters.includes(wordArray[i])) {
       letterSlots += wordArray[i];
     }
@@ -26,18 +25,18 @@ function hangman() {
       won = false;
     }
   }
-  document.getElementById('letterSlots').innerHTML = letterSlots;
-  return won;
+  document.getElementById('letterSlots').innerHTML = letterSlots; // update html page
+  return won; //need this in update(letter)
 }
 // update game status
 function update(letter) {
-  guessedLetters = guessedLetters + letter;
+  guessedLetters = guessedLetters + letter; // for storing guessedLetters in local storage
   var won = hangman();
   localStorage.setItem('guessed', guessedLetters);
 
   if (won !== false) {
     document.getElementById('status').innerHTML = "You correctly guessed the word without selling all of your body parts. HAPPY. Refresh to restart."
-    document.getElementById('theButton').disabled = true;
+    document.getElementById('theButton').disabled = true; // no more inputs accepted
     localStorage.removeItem('wordToGuess');
     localStorage.removeItem('tries');
     localStorage.removeItem('guesses');
@@ -47,7 +46,7 @@ function update(letter) {
     localStorage.setItem('tries', bodyParts);
   }
   if (bodyParts == 0) {
-    document.getElementById('theButton').disabled = true;
+    document.getElementById('theButton').disabled = true; // no more inputs accepted
     document.getElementById('status').innerHTML = "You ran out of body parts. SAD. Refresh to restart.";
     localStorage.removeItem('wordToGuess');
     localStorage.removeItem('tries');
@@ -57,13 +56,13 @@ function update(letter) {
 }
 
 // local storage
-if (localStorage.getItem('wordToGuess')) {
+if (localStorage.getItem('wordToGuess')) { // start based on whatever is in local storage
   word = localStorage.getItem('wordToGuess');
-  length = word.length; // yes I know it's going to be '5' but it's for the spirit of the task
+  length = word.length; // this is when var length gets used
   bodyParts = localStorage.getItem('tries');
   guessedLetters = localStorage.getItem('guessed');
 }
-else {
+else { // put stuff in local storage
   localStorage.setItem('wordToGuess', word);
   localStorage.setItem('tries', bodyParts);
   localStorage.setItem('guesses', guessedLetters);
