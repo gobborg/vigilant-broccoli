@@ -8,7 +8,8 @@ var guessedLetters = ''
 // take inputs
 function eatGuess() {
   var guess = document.getElementById('guessedLetter').value; // take guess from html form
-  update(guess);
+  var lowerCase = guess.toLowerCase()
+  update(lowerCase);
   document.getElementById('guessedLetter').value = ""; // clear html form
 }
 // fill in the slots with correct guesses
